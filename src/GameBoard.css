@@ -1,0 +1,185 @@
+.Board {
+  border-spacing: 20px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 10px;
+
+  /* box-shadow: 10px 10px 0 red; */
+  box-shadow: 0 0 50px #fff, -10px 0 80px #f0f, 10px 0 80px #0ff;
+}
+
+/* @font-face {
+  font-family: neon;
+  src: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/707108/neon.ttf);
+} */
+
+.Board-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lang {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+}
+.flag {
+  display: inline-block;
+  align-items: center;
+  justify-content: center;
+}
+.btn.language {
+  vertical-align: middle;
+  margin-left: 0;
+  width: auto;
+}
+.flagImg {
+  cursor: pointer;
+  display: inline-flex;
+  vertical-align: middle;
+  margin-right: -8px;
+  height: 20px;
+  width: 50px;
+}
+
+.neon-orange {
+  font-family: neon;
+  color: #f0a416;
+  font-size: 80px;
+  text-shadow: 0 0 3vw #f40a35;
+  animation: neon-orange 1s ease infinite;
+  -moz-animation: neon-orange 1s ease infinite;
+  -webkit-animation: neon-orange 1s ease infinite;
+}
+.neon-orange-full {
+  font-family: neon;
+  color: #f0a416 !important;
+  font-size: 80px;
+}
+
+.neon-blue {
+  font-family: neon;
+  color: #426dfb;
+  font-size: 80px;
+  text-shadow: 0 0 3vw #2356ff;
+  animation: neon-blue 2s linear infinite;
+  -moz-animation: neon-blue 2s linear infinite;
+  -webkit-animation: neon-blue 2s linear infinite;
+  -o-animation: neon-blue 2s linear infinite;
+}
+.neon-blue-full {
+  font-family: neon;
+  color: #426dfb !important;
+  font-size: 80px;
+  text-shadow: 0 0 3vw #2356ff;
+}
+
+.Info span.Player {
+  font-size: 20px;
+}
+
+.winner .neon-blue,
+.winner .neon-orange {
+  font-size: 200px;
+}
+
+.Info {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+.Gameover {
+  margin-top: 20px;
+  font-size: 50px;
+}
+
+.Info span {
+  color: #8bfdfe;
+}
+
+.Reset {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+}
+
+.btn {
+  cursor: pointer;
+  color: #8bfdfe;
+  margin-bottom: 0.1em;
+  margin-top: 0.1em;
+  height: 2em;
+  width: 10em;
+  box-shadow: 0 0 5px #fff, -1px 0 8px #f0f, 1px 0 8px #0ff;
+  background-color: inherit;
+  outline: 0;
+}
+
+@media only screen and (max-width: 800px) {
+  .Board {
+    transform: scale(0.5);
+    transition: all 0.4s ease-in;
+  }
+}
+
+@media only screen and (min-width: 801px) {
+  .Board {
+    transition: all 0.4s ease-in;
+  }
+}
+
+@keyframes neon-orange {
+  0%,
+  100% {
+    text-shadow: 0 0 1vw #fa1c16, 0 0 3vw #fa1c16, 0 0 10vw #fa1c16,
+      0 0 10vw #fa1c16, 0 0 0.4vw #fed128, 0.5vw 0.5vw 0.1vw #806914;
+    color: #fed128;
+  }
+  50% {
+    text-shadow: 0 0 0.5vw #800e0b, 0 0 1.5vw #800e0b, 0 0 5vw #800e0b,
+      0 0 5vw #800e0b, 0 0 0.2vw #800e0b, 0.5vw 0.5vw 0.1vw #40340a;
+    color: #806914;
+  }
+}
+
+@keyframes neon-blue {
+  0%,
+  100% {
+    text-shadow: 0 0 1vw #1041ff, 0 0 3vw #1041ff, 0 0 10vw #1041ff,
+      0 0 10vw #1041ff, 0 0 0.4vw #8bfdfe, 0.5vw 0.5vw 0.1vw #147280;
+    color: #28d7fe;
+  }
+  50% {
+    text-shadow: 0 0 0.5vw #082180, 0 0 1.5vw #082180, 0 0 5vw #082180,
+      0 0 5vw #082180, 0 0 0.2vw #082180, 0.5vw 0.5vw 0.1vw #0a3940;
+    color: #146c80;
+  }
+}
+@keyframes neon-orange-full {
+  0%,
+  100% {
+    text-shadow: 0 0 1vw #fa1c16, 0 0 3vw #fa1c16, 0 0 10vw #fa1c16,
+      0 0 10vw #fa1c16, 0 0 0.4vw #fed128, 0.5vw 0.5vw 0.1vw #806914;
+    color: #fed128;
+  }
+  /* 50% {
+    text-shadow: 0 0 0.5vw #800e0b, 0 0 1.5vw #800e0b, 0 0 5vw #800e0b,
+      0 0 5vw #800e0b, 0 0 0.2vw #800e0b, 0.5vw 0.5vw 0.1vw #40340a;
+    color: #806914;
+  } */
+}
+
+@keyframes neon-blue-full {
+  0%,
+  100% {
+    color: #28d7fe;
+  }
+  /* 50% {
+    text-shadow: 0 0 0.5vw #082180, 0 0 1.5vw #082180, 0 0 5vw #082180,
+      0 0 5vw #082180, 0 0 0.2vw #082180, 0.5vw 0.5vw 0.1vw #0a3940;
+    color: #146c80;
+  } */
+}

@@ -1,0 +1,51 @@
+.Table-cell {
+  display: table-cell;
+  background-color: rgba(206, 212, 205, 0.808);
+  color: black;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin: 5px 5px;
+  outline: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  /* box-shadow: inset 0 0 0 2px rgb(165, 255, 80); */
+  /* box-shadow: inset 0 0 5px #fff, -2px 0 8px #f0f, 2px 0 8px #0ff; */
+}
+
+.Table-cell.Red {
+  background-color: #f0a416;
+}
+
+.Table-cell.Yellow {
+  background-color: #426dfb;
+}
+
+.Table-cell:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+  transition: 0.5s ease-in-out;
+}
+
+.Table-cell.isWinner {
+  animation: brightToggle 2s ease-in-out infinite;
+}
+
+.Table-cell.Disabled:hover {
+  cursor: not-allowed;
+  transition: none;
+  transform: none;
+}
+
+@keyframes brightToggle {
+  0%,
+  100% {
+    filter: brightness(0.4);
+  }
+  50% {
+    filter: brightness(1);
+  }
+}
