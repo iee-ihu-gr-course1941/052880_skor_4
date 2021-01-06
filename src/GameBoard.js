@@ -18,6 +18,7 @@ export default class GameBoard extends Component {
       orangeWins: 0,
       blueWins: 0,
       winner: false,
+      draw: false,
       victoriousPlayer: null,
       disabled: false,
       winSet: [],
@@ -25,6 +26,7 @@ export default class GameBoard extends Component {
     };
     this.resetBoard = this.resetBoard.bind(this);
     this.resetScore = this.resetScore.bind(this);
+    this.setDraw = this.setDraw.bind(this);
     this.toggleLanguage = this.toggleLanguage.bind(this);
   }
 
@@ -78,11 +80,20 @@ export default class GameBoard extends Component {
   }
 
   checkWinner(x, y) {
-    this.checkRow(x, y);
-    this.checkCol(x, y);
-    this.checkDiag(x, y);
-    if (!this.state.winner)
-      this.setState((st) => ({ activePlayer: st.activePlayer === 2 ? 1 : 2 }));
+    let emptyCell = false;
+    //Check if there are empty cells
+    emptyCell = this.state.gameBoard.some((row) => row.includes(0));
+    if (emptyCell) {
+      this.checkRow(x, y);
+      this.checkCol(x, y);
+      this.checkDiag(x, y);
+      if (!this.state.winner)
+        this.setState((st) => ({
+          activePlayer: st.activePlayer === 2 ? 1 : 2,
+        }));
+    } else {
+      this.setDraw();
+    }
   }
 
   checkRow(x, y) {
@@ -220,6 +231,17 @@ export default class GameBoard extends Component {
     winS.splice(0, winS.length);
   }
 
+  setDraw() {
+    this.setState({
+      draw: true,
+    });
+    this.setState((st) => ({
+      orangeWins: st.orangeWins + 0.5,
+      blueWins: st.blueWins + 0.5,
+    }));
+    this.freezeGame();
+  }
+
   setWinner() {
     // Efoson vrethike nikitis ston teleutaio guro pername times sto winner = true kai koitame pios itan o nikitis gia na auksisoume ton antistoixo metriti!
     this.setState({ victoriousPlayer: this.state.activePlayer });
@@ -256,6 +278,7 @@ export default class GameBoard extends Component {
       activePlayer: newPlayer,
       winner: false,
       victoriousPlayer: 0,
+      draw: false,
       winSet: [],
     });
   }
@@ -285,21 +308,37 @@ export default class GameBoard extends Component {
     } = language;
     let lang = this.state.language;
     let vic = this.state.victoriousPlayer;
-    let gameOver = (
-      <div
-        className={`${
-          vic === 1 ? "neon-orange Gameover" : "neon-blue Gameover"
-        }`}
-        style={
-          this.state.winner
-            ? { visibility: "visible" }
-            : { visibility: "hidden" }
-        }
-      >
-        {" "}
-        {vic === 1 ? `${orangeWins[lang]} ` : `${blueWins[lang]} `}
-      </div>
-    );
+    let draw = this.state.draw;
+    let gameOver;
+
+    if (!draw) {
+      gameOver = (
+        <div
+          className={`${
+            vic === 1 ? "neon-orange Gameover" : "neon-blue Gameover"
+          }`}
+          style={
+            this.state.winner
+              ? { visibility: "visible" }
+              : { visibility: "hidden" }
+          }
+        >
+          {" "}
+          {vic === 1 ? `${orangeWins[lang]} ` : `${blueWins[lang]} `}
+        </div>
+      );
+    } else if (draw) {
+      gameOver =
+        lang === "English" ? (
+          <div className="draw">
+            Game was a Draw! Both players awarded 0.5 points!
+          </div>
+        ) : (
+          <div className="draw">
+            Ισοπαλία! Απονεμήθηκαν 0.5 πόντοι στον κάθε παίκτη!
+          </div>
+        );
+    }
     return (
       <div className="The-game">
         <div className="lang">
@@ -307,6 +346,7 @@ export default class GameBoard extends Component {
             <img
               className="flagImg"
               src={lang === "English" ? EnglishFlag : GreekFlag}
+              alt={lang === "English" ? "EnglishFlag" : "GreekFlag"}
               onClick={this.toggleLanguage}
             ></img>
           </span>

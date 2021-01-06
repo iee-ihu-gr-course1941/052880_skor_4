@@ -98,6 +98,11 @@
   color: #8bfdfe;
 }
 
+.draw {
+  margin-top: 10px;
+  font-size: 2rem;
+  color: #8bfdfe;
+}
 .Reset {
   display: flex;
   flex-direction: column;
